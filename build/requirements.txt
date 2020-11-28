@@ -6,3 +6,7 @@ Mopidy-MPD==3.0.0
 Mopidy-Podcast==3.0.0
 Mopidy-Scrobbler==2.0.0
 Mopidy-Spotify==4.0.1
+Mopidy-Local==3.1.1
+Mopidy-YouTube==3.1
+Mopidy-MusicBox-Webclient==3.1.0
+Mopidy-Mowecl==0.4.0

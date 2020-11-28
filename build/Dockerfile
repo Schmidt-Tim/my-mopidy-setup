@@ -1,6 +1,4 @@
-ARG BUILD_FROM=debian:buster-slim
-
-FROM $BUILD_FROM
+FROM balenalib/rpi-raspbian:buster-20201118
 
 RUN apt-get update \
  && apt-get install -y wget \
@@ -28,26 +26,19 @@ RUN apt-get update \
                        libasound2-dev \
                        libspotify-dev \
                        dleyna-server \
+                       git \
  && rm -rf /var/lib/apt/lists/*
 
-# Add git to get some Mopidy stuff straight from Github
-RUN apt-get update \
- && apt-get install -y git \
- && rm -rf /var/lib/apt/lists/*
-
+# pip install requirements
 COPY requirements.txt requirements.txt
 
 RUN pip3 install -r requirements.txt \
  && rm -rf ~/.cache/pip
 
+# refresh certs
 RUN update-ca-certificates --fresh
 
-COPY mopidy.conf /root/.config/mopidy/
 
-VOLUME ["/root/.cache/mopidy", "/root/.local/share/mopidy"]
-
-ENV TZ=Europe/London
-
-EXPOSE 6600 6680
+ENV TZ=Europe/Berlin
 
 ENTRYPOINT ["mopidy"]

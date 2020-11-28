@@ -1,0 +1,16 @@
+version: "3.8"
+
+services:
+  mopidy:
+    container_name: mopidy
+    build: ./build
+    restart: unless-stopped
+    ports:
+      - "80:6680"
+#      - "6600:6600"
+    volumes:
+      - ./conf/mopidy.conf:/root/.config/mopidy/mopidy.conf
+      - ./data:/root/.local/share
+      - ./library:/root/Music
+    devices:
+      - "/dev/snd"
